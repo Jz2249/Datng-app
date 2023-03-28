@@ -1,0 +1,43 @@
+
+
+{% load static %}
+
+<h2>Yale Dating</h2>
+<link rel ="stylesheet" href = "{% static 'accounts/login.css' %}">
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+{% if not user.is_authenticated %}
+
+<div class="wrap">
+    <div class="form">
+        <div class="left">
+            <video src= "/media/sample.mp4" muted autoplay loop></video> 
+        </div>
+        <div class="right">
+            <div class = 'right-con'>
+                
+                <div style = 'margin-top:30px;'>
+                    <h1>    Welcome </h1>
+                <form method="POST">{%csrf_token%}
+                    {{ form|crispy }}
+                    <input class = 'btn' type = "submit" value="Login">
+                </form>
+                <br>
+                <p>Need an account? Please <a href='/register/'>register</a></p>
+                </div>
+            </div>
+            
+        </div>
+      
+    </div>
+    
+{% else %}
+<p> You're already logged in. Would you like to <a href='/logout/'>logout</a>?</p>
+</div>
+
+{% endif %}
+
+{% endblock %}

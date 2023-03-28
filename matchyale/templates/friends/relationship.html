@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="col-md-8">
+        <h1>My Relationship</h2>
+        <form method="post">
+            {% csrf_token %}
+        
+
+        <h2> You have {{friends_number}} matches. </h2>
+        
+        {% for friend in friends %}
+ 
+            <img class="rounded-circle account-img" src={{friend.profile.image.url}} >
+        
+            <a href="{% url 'user-info2' friend.username %}" > 
+            <h3>{{ friend.username }}</h3>
+            </a>
+            <a href="{% url 'chat' username=friend.username%}">
+                <button type="button" class="btn btn-primary btn-sm">chat</button>
+            </a>
+            <a href="{% url 'my-removal' operation='remove' pk=friend.pk %}">
+                <button type="button" class="btn btn-dark btn-sm">Remove Friend</button>
+            </a>
+            <br>
+       
+        {% endfor %}
+            <br></br><br></br>
+        <h2>You received {{received_num}} like(s)</h2>
+        {% for user in received_requests %}
+        <div>
+            <img class="rounded-circle account-img" src={{user.sender.profile.image.url}} >
+            </a>
+            <a href="{% url 'user-info2' user.sender %}">
+            <h3>{{ user.sender }}</h3>
+            <a href="{% url 'my-add' operation='add' pk=user.sender.pk %}">
+            <button type="button" class="btn btn-outline-success btn-sm">Accpet</button>
+            </a>
+            <a button type="button" href="{% url 'my-request-removal' operation='remove-received-requests' pk=user.sender.pk %}" class="btn btn-dark btn-sm"> Remove</a>
+            </a>
+        </div>
+        {% endfor %}
+        <br></br><br></br>
+        <h2>You sent {{sent_num}} like(s)</h2>
+        {% for user in sent_requests %}
+            {% if user %}
+            <div>
+                <img class="rounded-circle account-img" src={{user.receiver.profile.image.url}} >
+                <a href="{% url 'user-info2' user.receiver %}">
+                <h3>{{ user.receiver }}</h3>
+                <a href="{% url 'my-request-removal' operation='remove-sent-requests' pk=user.receiver.pk %}">Dislike</a>
+                <!-- <a href="#">Dislike</a> -->
+                <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+                <script type="text/javascript">
+                    $(document).ready(function(){
+                        $('a').click(function(){
+                            $('a').toggleClass('active')
+                        })
+                })
+                </script>
+
+            </div>
+            <br>
+            {% endif %}
+        {% endfor %}
+        <br></br><br></br>
+
+        <h2> Total Users </h2>
+        {% for user in all_users %}
+            <img class="rounded-circle account-img" src={{user.profile.image.url}} >
+            <a href="{% url 'user-info2' user.username %}">
+            <h3>{{ user.username }}</h3>
+            <a href="{% url 'my-request' pk=user.pk %}">Like</a>
+            <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+            <script type="text/javascript">
+                $(document).ready(function(){
+                    $('a').click(function(){
+                        $('a').toggleClass('active')
+                    })
+                })
+            </script>        
+            <br>
+            {% endfor %}
+            <br></br><br></br>            
+
+
+    </div>
+</div>
+{% endblock %}

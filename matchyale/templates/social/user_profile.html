@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="media-body">
+    
+        <img  src="{{ user.profile.image.url }}" width="460" height="345">
+        <h1 class="account-heading">{{user.username}}'s profile </h1>
+        <p class="text-secondary">gender: {{user.profile.gender}}</p>
+        <p class="text-secondary">height: {{user.profile.height}}</p>
+        <p class="text-secondary">bio: {{user.profile.bio}}</p>
+        <a class="btn btn-outline-primary" href="{% url 'user-info' user %}">{{ user }}'s moment</a>
+        <a class="btn btn-outline-primary" href="{% url 'my-request' user.pk %}"> Friend Request </a>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,61 @@
+* {
+  padding: 0;
+  margin: 0
+}
+
+.container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #eee
+}
+
+.like_button {
+  width: 150px;
+  height: 50px;
+  background-color: #AAAAAA;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 7px;
+  font-size: 22px;
+  color:#fff;
+  cursor: pointer;
+}
+
+
+.animated .bx {
+  transition: all 0.5s;
+  position: relative
+}
+
+
+
+.animated .bx::after {
+  position: absolute;
+  content: '';
+  height: 12px;
+  width: 20px;
+  background-color: #aaa;
+  transform: rotate(15deg);
+  left: 5px;
+  top: -5px
+}
+
+.animated .bx {
+  transform: rotate(20deg);
+  
+}
+
+.like_button .bx{
+  transition:all 0.5s;
+}
+
+
+.like_button .like_text {
+  padding-left: 8px;
+  font-size:19px;
+  margin-top:2px;
+  transition:all 0.8s;
+}

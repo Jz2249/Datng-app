@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+  <article class="media content-section">
+    <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
+    <div class="media-body">
+      <div class="article-metadata">
+        <a class="mr-2" href="{% url 'user-info2' post.author %}">{{ post.author }}</a>
+        <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
+        {% if post.author == request.user %}
+         <a class="btn btn-primary btn-sm mt-1 mb-1" href={%url 'moment-update' post.id %}>Update</a>
+         <a class="btn btn-danger btn-sm mt-1 mb-1" href={%url 'moment-delete' post.id %}>Delete</a>
+        {% endif %}
+      </div>
+      <h2 class="article-title">{{ post.title }}</h2>
+      <p class="article-content">{{ post.content }}</p>
+      {% if post.image %} 
+      <img  src="{{ post.image.url}}" width="460" height="345" >
+      <br/><br/>
+      {% endif %}
+      <form method="POST">
+        {% csrf_token %}
+        {{ form | crispy }}
+        <div class="d-grid gap-2">
+            <button class="btn btn-success mt-3">Leave a comment!</button>
+        </div>
+    </form>
+      <br/></br>
+      <h2>Comment...</h2>
+      <br/>
+      
+      {% if not comments %}
+        No comment yet
+      {% else %}
+        {% for comment in comments %}
+          {{comment.author}} - {{comment.date_posted}}
+            {% if request.user == comment.author %}
+            <a href="{% url 'comment-delete' post.pk comment.pk  %}" style="color: #333;">delete<i class="fas fa-trash"></i></a>
+            {% endif %}
+          
+          <br/>{{comment.body}}</br>
+          <br/><br/>
+          <hr>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </article>  
+{% endblock content %}

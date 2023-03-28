@@ -1,0 +1,74 @@
+
+{% extends "base.html" %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'accounts/like.css' %}">
+
+{% block content %}
+    {% if not user.is_authenticated%}
+        <h1> welcome to YALE DATE, anonymous! </h1>
+    {% else %}
+        <h1> welcome to YALE DATE, {{user.username}} </h1>
+    {% endif %}
+        <form action = '' mothod = "GET">
+        <br></br> 
+        <input type = 'text' name = 'q' placeholder= "type username to search">
+        <input type = 'submit' value = 'search users'> <a href = "{% url 'user-info2' user.username%}"></a>
+        </form>
+        <br></br> <br></br><br></br> 
+        <video src= "/media/coming_soon.mp4" width=800 muted autoplay loop></video> 
+
+        </div>
+          <div class="col-md-4">
+          <div class="content-section">
+              <h3>Weekly TOP 3 Popular</h3>
+              <p class='text-muted'>information of user
+              <ul class="list-group">
+
+
+                  <li class="list-group-item list-group-item-light"><img class = "rounded-circle article-img" src="{{top1_user.profile.image.url}}"></li>
+                  <li class="list-group-item list-group-item-light">user: {{top1_user}}</li>
+                  <li class="list-group-item list-group-item-light">gender: {{top1_user.profile.gender}}</li>
+                  <li class="list-group-item list-group-item-light">age: {{top1_user.profile.age}}</li>
+                  <li class="list-group-item list-group-item-light">bio: {{top1_user.profile.bio}}</li>
+                  <li class="list-group-item list-group-item-light">Like Received: {{top1_num}}</li>
+
+                  <li class="list-group-item list-group-item-light"><img class = "rounded-circle article-img" src="{{top2_user.profile.image.url}}"></li>
+                  <li class="list-group-item list-group-item-light">user: {{top2_user}}</li>
+                  <li class="list-group-item list-group-item-light">gender: {{top2_user.profile.gender}}</li>
+                  <li class="list-group-item list-group-item-light">age: {{top2_user.profile.age}}</li>
+                  <li class="list-group-item list-group-item-light">bio: {{top2_user.profile.bio}}</li>
+                  <li class="list-group-item list-group-item-light">Like Received: {{top2_num}}</li>
+                  
+                  <li class="list-group-item list-group-item-light"><img class = "rounded-circle article-img" src="{{top3_user.profile.image.url}}"></li>
+                  <li class="list-group-item list-group-item-light">user: {{top3_user}}</li>
+                  <li class="list-group-item list-group-item-light">gender: {{top3_user.profile.gender}}</li>
+                  <li class="list-group-item list-group-item-light">age: {{top3_user.profile.age}}</li>
+                  <li class="list-group-item list-group-item-light">bio: {{top3_user.profile.bio}}</li>
+                  <li class="list-group-item list-group-item-light">Like Received: {{top3_num}}</li>
+              </ul>
+              </p>
+          </div>
+          </div>
+        </div>
+        
+      
+    <!--
+    <div
+    data-lyket-type="updown"
+    data-lyket-id="my-second-post"
+    data-lyket-namespace="blog"
+    />
+    <div
+    data-lyket-type="updown"
+    data-lyket-id="my-third-post"
+    data-lyket-namespace="blog"
+    data-lyket-template="reddit"
+    />
+    <script src="https://unpkg.com/@lyket/widget@latest/dist/lyket.js?apiKey=acc0dbccce8e557db5ebbe6d605aaa" />
+    -->
+
+ 
+
+{% endblock content %}
+
+
