@@ -1,0 +1,15 @@
+
+pip install Django
+pip install pillow
+pip install django-crispy-forms
+pip install crispy-bootstrap4
+
+pip install -U 'channels[daphne]' (for Mac only)
+pip install channels_redis 
+
+sudo service regis-server start (for windows)
+redis-cli shutdown
+
+brew services start redis 
+brew services stop redis  
+ref: https://lyket.dev/docs/html
